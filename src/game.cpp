@@ -1,7 +1,5 @@
 #include "game.h"
 #include "knight.h"
-#include "squirrel.h"
-#include "pegasus.h"
 #include <iostream>
 #include <random>
 #include <chrono>
@@ -66,36 +64,19 @@ void Game::initializeNPCs() {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> posDist(0, mapSize_ - 1);
-    std::uniform_int_distribution<> typeDist(0, 2);
     
     for (int i = 0; i < npcCount_; ++i) {
         int x = posDist(gen);
         int y = posDist(gen);
-        int type = typeDist(gen);
         
-        std::string name;
-        NPCPtr npc;
-        
-        switch (type) {
-            case 0:
-                name = "Knight_" + std::to_string(i);
-                npc = std::make_shared<Knight>(name, x, y);
-                break;
-            case 1:
-                name = "Squirrel_" + std::to_string(i);
-                npc = std::make_shared<Squirrel>(name, x, y);
-                break;
-            case 2:
-                name = "Pegasus_" + std::to_string(i);
-                npc = std::make_shared<Pegasus>(name, x, y);
-                break;
-        }
+        std::string name = "Knight_" + std::to_string(i);
+        NPCPtr npc = std::make_shared<Knight>(name, x, y);
         
         npcs_.push_back(npc);
     }
     
     std::lock_guard<std::mutex> lock(coutMutex_);
-    std::cout << "Initialized " << npcs_.size() << " NPCs on " << mapSize_ 
+    std::cout << "Initialized " << npcs_.size() << " Knights on " << mapSize_ 
               << "x" << mapSize_ << " map\n";
 }
 
@@ -266,5 +247,5 @@ void Game::printMap() {
     }
     
     std::cout << "\nAlive NPCs: " << aliveCount << " / " << npcs_.size() << "\n";
-    std::cout << "Legend: K=Knight, S=Squirrel, P=Pegasus, *=Multiple, .=Empty\n";
+    std::cout << "Legend: K=Knight, *=Multiple, .=Empty\n";
 }

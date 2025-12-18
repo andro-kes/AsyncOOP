@@ -1,7 +1,5 @@
 #include "game.h"
 #include "knight.h"
-#include "squirrel.h"
-#include "pegasus.h"
 #include <iostream>
 #include <random>
 #include <chrono>
@@ -249,5 +247,5 @@ void Game::printMap() {
     }
     
     std::cout << "\nAlive NPCs: " << aliveCount << " / " << npcs_.size() << "\n";
-    std::cout << "Legend: K=Knight, S=Squirrel, P=Pegasus, *=Multiple, .=Empty\n";
+    std::cout << "Legend: K=Knight, *=Multiple, .=Empty\n";
 }

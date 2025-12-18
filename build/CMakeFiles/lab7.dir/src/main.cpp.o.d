@@ -1,8 +1,8 @@
 CMakeFiles/lab7.dir/src/main.cpp.o: \
  /home/andrey/LabsOOP/AsyncOOP/src/main.cpp /usr/include/stdc-predef.h \
- /home/andrey/LabsOOP/AsyncOOP/include/game.h \
- /home/andrey/LabsOOP/AsyncOOP/include/npc.h /usr/include/c++/13/string \
- /usr/include/c++/13/bits/requires_hosted.h \
+ /home/andrey/LabsOOP/AsyncOOP/src/../include/game.h \
+ /home/andrey/LabsOOP/AsyncOOP/src/../include/npc.h \
+ /usr/include/c++/13/string /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \

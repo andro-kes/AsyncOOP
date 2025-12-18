@@ -1,5 +1,7 @@
 #include "../include/game.h"
 #include "../include/knight.h"
+#include "../include/squirrel.h"
+#include "../include/pegasus.h"
 #include <iostream>
 #include <random>
 #include <chrono>
@@ -64,20 +66,44 @@ void Game::initializeNPCs() {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> posDist(0, mapSize_ - 1);
+    std::uniform_int_distribution<> typeDist(0, 2); // 0=Knight, 1=Squirrel, 2=Pegasus
+
+    int knightCount = 0, squirrelCount = 0, pegasusCount = 0;
     
     for (int i = 0; i < npcCount_; ++i) {
         int x = posDist(gen);
         int y = posDist(gen);
         
-        std::string name = "Knight_" + std::to_string(i);
-        NPCPtr npc = std::make_shared<Knight>(name, x, y);
+        NPCPtr npc;
+        int typeRoll = typeDist(gen);
+        switch (typeRoll) {
+            case 0: {
+                std::string name = "Knight_" + std::to_string(++knightCount);
+                npc = std::make_shared<Knight>(name, x, y);
+                break;
+            }
+            case 1: {
+                std::string name = "Squirrel_" + std::to_string(++squirrelCount);
+                npc = std::make_shared<Squirrel>(name, x, y);
+                break;
+            }
+            case 2:
+            default: {
+                std::string name = "Pegasus_" + std::to_string(++pegasusCount);
+                npc = std::make_shared<Pegasus>(name, x, y);
+                break;
+            }
+        }
         
         npcs_.push_back(npc);
     }
     
     std::lock_guard<std::mutex> lock(coutMutex_);
-    std::cout << "Initialized " << npcs_.size() << " Knights on " << mapSize_ 
-              << "x" << mapSize_ << " map\n";
+    std::cout << "Initialized " << npcs_.size() << " NPCs on " << mapSize_ 
+              << "x" << mapSize_ << " map\n"
+              << "  Knights : " << knightCount << "\n"
+              << "  Squirrels: " << squirrelCount << "\n"
+              << "  Pegasus  : " << pegasusCount << "\n";
 }
 
 void Game::movementThread() {

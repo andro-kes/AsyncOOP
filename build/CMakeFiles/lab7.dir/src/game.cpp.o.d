@@ -1,8 +1,8 @@
 CMakeFiles/lab7.dir/src/game.cpp.o: \
  /home/andrey/LabsOOP/AsyncOOP/src/game.cpp /usr/include/stdc-predef.h \
- /home/andrey/LabsOOP/AsyncOOP/include/game.h \
- /home/andrey/LabsOOP/AsyncOOP/include/npc.h /usr/include/c++/13/string \
- /usr/include/c++/13/bits/requires_hosted.h \
+ /home/andrey/LabsOOP/AsyncOOP/src/../include/game.h \
+ /home/andrey/LabsOOP/AsyncOOP/src/../include/npc.h \
+ /usr/include/c++/13/string /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -198,7 +198,9 @@ CMakeFiles/lab7.dir/src/game.cpp.o: \
  /usr/include/c++/13/bits/deque.tcc /usr/include/c++/13/bits/stl_heap.h \
  /usr/include/c++/13/bits/stl_queue.h \
  /usr/include/c++/13/condition_variable \
- /home/andrey/LabsOOP/AsyncOOP/include/knight.h \
+ /home/andrey/LabsOOP/AsyncOOP/src/../include/knight.h \
+ /home/andrey/LabsOOP/AsyncOOP/src/../include/squirrel.h \
+ /home/andrey/LabsOOP/AsyncOOP/src/../include/pegasus.h \
  /usr/include/c++/13/iostream /usr/include/c++/13/ostream \
  /usr/include/c++/13/ios /usr/include/c++/13/bits/ios_base.h \
  /usr/include/c++/13/bits/locale_classes.h \

@@ -6,7 +6,24 @@ thread_local std::mt19937 NPC::rng_(std::random_device{}());
 NPC::NPC(Type type, const std::string& name, int x, int y)
     : type_(type), name_(name), x_(x), y_(y), alive_(true) {}
 
+int NPC::getX() const {
+    std::lock_guard<std::mutex> lock(posMutex_);
+    return x_;
+}
+
+int NPC::getY() const {
+    std::lock_guard<std::mutex> lock(posMutex_);
+    return y_;
+}
+
+void NPC::getPosition(int& x, int& y) const {
+    std::lock_guard<std::mutex> lock(posMutex_);
+    x = x_;
+    y = y_;
+}
+
 void NPC::setPosition(int x, int y) {
+    std::lock_guard<std::mutex> lock(posMutex_);
     x_ = x;
     y_ = y;
 }
@@ -21,8 +38,12 @@ int NPC::rollDice() const {
 }
 
 double NPC::distanceTo(const NPC& other) const {
-    int dx = x_ - other.x_;
-    int dy = y_ - other.y_;
+    int x1, y1, x2, y2;
+    getPosition(x1, y1);
+    other.getPosition(x2, y2);
+    
+    int dx = x1 - x2;
+    int dy = y1 - y2;
     return std::sqrt(dx * dx + dy * dy);
 }
 

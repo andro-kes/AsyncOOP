@@ -50,8 +50,10 @@ void Game::run() {
     for (const auto& npc : npcs_) {
         if (npc->isAlive()) {
             alive++;
+            int x, y;
+            npc->getPosition(x, y);
             std::cout << npc->getName() << " (" << NPC::typeToString(npc->getType()) 
-                     << ") survived at (" << npc->getX() << ", " << npc->getY() << ")\n";
+                     << ") survived at (" << x << ", " << y << ")\n";
         } else {
             std::cout << npc->getName() << " (" << NPC::typeToString(npc->getType()) 
                      << ") was killed\n";
@@ -121,17 +123,19 @@ void Game::movementThread() {
 void Game::moveNPC(NPCPtr npc) {
     static thread_local std::mt19937 gen(std::random_device{}());
     static thread_local std::uniform_int_distribution<> dirDist(-1, 1);
-    static thread_local std::uniform_int_distribution<> rangeDist(0, 100);
     
     int range = npc->getMovementRange();
     
-    // Move by a random step within the movement range
-    int step = rangeDist(gen) % (range + 1);
-    int dx = dirDist(gen) * step;
-    int dy = dirDist(gen) * step;
+    // Move by a random step within the movement range (avoiding modulo bias)
+    std::uniform_int_distribution<> stepDist(0, range);
+    int dx = dirDist(gen) * stepDist(gen);
+    int dy = dirDist(gen) * stepDist(gen);
     
-    int newX = std::max(0, std::min(mapSize_ - 1, npc->getX() + dx));
-    int newY = std::max(0, std::min(mapSize_ - 1, npc->getY() + dy));
+    int currentX, currentY;
+    npc->getPosition(currentX, currentY);
+    
+    int newX = std::max(0, std::min(mapSize_ - 1, currentX + dx));
+    int newY = std::max(0, std::min(mapSize_ - 1, currentY + dy));
     
     npc->setPosition(newX, newY);
 }
@@ -224,8 +228,8 @@ void Game::printMap() {
     for (const auto& npc : npcs_) {
         if (npc->isAlive()) {
             aliveCount++;
-            int x = npc->getX();
-            int y = npc->getY();
+            int x, y;
+            npc->getPosition(x, y);
             
             char symbol;
             switch (npc->getType()) {

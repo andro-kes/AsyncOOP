@@ -3,6 +3,8 @@
 #include <string>
 #include <memory>
 #include <random>
+#include <mutex>
+#include <atomic>
 
 class NPC {
 public:
@@ -17,8 +19,12 @@ public:
 
     Type getType() const { return type_; }
     std::string getName() const { return name_; }
-    int getX() const { return x_; }
-    int getY() const { return y_; }
+    
+    // Thread-safe position getters
+    int getX() const;
+    int getY() const;
+    void getPosition(int& x, int& y) const;
+    
     bool isAlive() const { return alive_; }
 
     void setPosition(int x, int y);
@@ -41,7 +47,9 @@ protected:
     std::string name_;
     int x_;
     int y_;
-    bool alive_;
+    std::atomic<bool> alive_;
+    
+    mutable std::mutex posMutex_;
     
     static thread_local std::mt19937 rng_;
 };

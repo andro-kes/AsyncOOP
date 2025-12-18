@@ -149,11 +149,12 @@ void Game::detectCombats() {
         for (size_t j = i + 1; j < npcs_.size(); ++j) {
             if (!npcs_[j]->isAlive()) continue;
             
-            double distance = npcs_[i]->distanceTo(*npcs_[j]);
+            // Use squared distance to avoid expensive sqrt operation
+            int distanceSquared = npcs_[i]->distanceSquaredTo(*npcs_[j]);
             
             // Check if within either NPC's kill range
             int maxKillRange = std::max(npcs_[i]->getKillRange(), npcs_[j]->getKillRange());
-            if (distance <= maxKillRange) {
+            if (distanceSquared <= maxKillRange * maxKillRange) {
                 
                 // Add to combat queue
                 std::lock_guard<std::mutex> lock(combatQueueMutex_);

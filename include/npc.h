@@ -39,6 +39,7 @@ public:
     virtual int getDefenseBonus() const = 0;
 
     double distanceTo(const NPC& other) const;
+    int distanceSquaredTo(const NPC& other) const;
     
     static std::string typeToString(Type type);
 

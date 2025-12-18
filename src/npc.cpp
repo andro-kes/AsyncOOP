@@ -47,6 +47,16 @@ double NPC::distanceTo(const NPC& other) const {
     return std::sqrt(dx * dx + dy * dy);
 }
 
+int NPC::distanceSquaredTo(const NPC& other) const {
+    int x1, y1, x2, y2;
+    getPosition(x1, y1);
+    other.getPosition(x2, y2);
+    
+    int dx = x1 - x2;
+    int dy = y1 - y2;
+    return dx * dx + dy * dy;
+}
+
 std::string NPC::typeToString(Type type) {
     switch (type) {
         case Type::Knight: return "Knight";

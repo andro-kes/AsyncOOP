@@ -119,13 +119,15 @@ void Game::movementThread() {
 }
 
 void Game::moveNPC(NPCPtr npc) {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dist(-1, 1);
+    static thread_local std::mt19937 gen(std::random_device{}());
+    std::uniform_int_distribution<> dirDist(-1, 1);
     
     int range = npc->getMovementRange();
-    int dx = dist(gen) * range;
-    int dy = dist(gen) * range;
+    
+    // Move by a random step within the movement range
+    std::uniform_int_distribution<> stepDist(0, range);
+    int dx = dirDist(gen) * stepDist(gen);
+    int dy = dirDist(gen) * stepDist(gen);
     
     int newX = std::max(0, std::min(mapSize_ - 1, npc->getX() + dx));
     int newY = std::max(0, std::min(mapSize_ - 1, npc->getY() + dy));

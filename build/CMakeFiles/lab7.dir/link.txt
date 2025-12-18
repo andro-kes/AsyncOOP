@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/lab7.dir/src/main.cpp.o CMakeFiles/lab7.dir/src/npc.cpp.o CMakeFiles/lab7.dir/src/knight.cpp.o CMakeFiles/lab7.dir/src/squirrel.cpp.o CMakeFiles/lab7.dir/src/pegasus.cpp.o CMakeFiles/lab7.dir/src/game.cpp.o -o lab7 

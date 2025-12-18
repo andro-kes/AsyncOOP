@@ -1,0 +1,3 @@
+/home/andrey/LabsOOP/AsyncOOP/build/CMakeFiles/lab7.dir
+/home/andrey/LabsOOP/AsyncOOP/build/CMakeFiles/edit_cache.dir
+/home/andrey/LabsOOP/AsyncOOP/build/CMakeFiles/rebuild_cache.dir

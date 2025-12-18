@@ -16,7 +16,7 @@ void NPC::kill() {
 }
 
 int NPC::rollDice() const {
-    std::uniform_int_distribution<int> dist(1, 6);
+    static thread_local std::uniform_int_distribution<int> dist(1, 6);
     return dist(rng_);
 }
 

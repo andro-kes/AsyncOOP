@@ -146,9 +146,9 @@ void Game::detectCombats() {
             
             double distance = npcs_[i]->distanceTo(*npcs_[j]);
             
-            // Check if within kill range
-            if (distance <= npcs_[i]->getKillRange() || 
-                distance <= npcs_[j]->getKillRange()) {
+            // Check if within either NPC's kill range
+            int maxKillRange = std::max(npcs_[i]->getKillRange(), npcs_[j]->getKillRange());
+            if (distance <= maxKillRange) {
                 
                 // Add to combat queue
                 std::lock_guard<std::mutex> lock(combatQueueMutex_);

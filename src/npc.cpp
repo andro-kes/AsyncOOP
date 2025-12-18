@@ -1,4 +1,4 @@
-#include "npc.h"
+#include "../include/npc.h"
 #include <cmath>
 
 thread_local std::mt19937 NPC::rng_(std::random_device{}());

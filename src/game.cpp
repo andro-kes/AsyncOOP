@@ -1,5 +1,5 @@
-#include "game.h"
-#include "knight.h"
+#include "../include/game.h"
+#include "../include/knight.h"
 #include <iostream>
 #include <random>
 #include <chrono>

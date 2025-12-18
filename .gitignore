@@ -1,5 +1,4 @@
 # Build directories
-build/
 cmake-build-*/
 
 # Compiled files
